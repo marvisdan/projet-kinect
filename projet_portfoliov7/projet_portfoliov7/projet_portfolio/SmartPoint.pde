@@ -11,6 +11,9 @@ String  legende0= "Place à Amsterdam";
 String  legende1= "Métro";
 String  legende2= "Soirée UPEM";
 String  legende3= "Place publique";
+String textfooter1 ="2015-Portfolio Interactive";
+String textfooter2 = "Made with love by Marvis DAN";
+
 color couleur = color(0);
 PFont fontLegende = loadFont("HelveticaNeue-Light-24.vlw");
 
@@ -90,8 +93,15 @@ PFont fontLegende = loadFont("HelveticaNeue-Light-24.vlw");
                 colorMode(RGB);
                 stroke(255);
                 fill(0);
-                rect(0, 0, 430, height);
-                image( logo[1], 200, 50); // affichage du logo
+                rect(-10, -10, 430, height);
+                image( logo[1], 170, 50); // affichage du logo
+                image(text, 200, 400);// texte de description
+                textFont(fontLegende, 24);
+                fill(255);
+                text(textfooter1,50, height-50);
+                textFont(fontLegende, 24);
+                fill(255);
+                text(textfooter2,width-350, height-50);
 
       }
       void bouge(){ // fonction qui permet de faire bouger les images à l'aide des zones de bouton,

@@ -6,6 +6,7 @@ Btn btn1, btn2,btn3,btn4;
 Maconsole console;
 MonTexte titre;
 PImage [] img, repere, logo, couverture;
+PImage text;
 String message;
 int[] userList;
 
@@ -45,6 +46,9 @@ void setup(){
  // image d'accueil
  couverture = new PImage[2];
  couverture[1] = loadImage("couverture.PNG");
+ 
+ text = loadImage("text.png");
+
   
   sp = new SmartPoint();
   btn1 = new Btn(10,10,50,height-30,1,5);
@@ -196,7 +200,7 @@ void afficheImage( )
 
 void onLostUser(SimpleOpenNI curContext,int userId)
 {
-  println("onLostUser - userId: " + userId);
+  //println("onLostUser - userId: " + userId);
 }
 
 
