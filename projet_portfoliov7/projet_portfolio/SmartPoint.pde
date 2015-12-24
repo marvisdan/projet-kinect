@@ -1,12 +1,19 @@
 class SmartPoint
 {
-int position = width/2;
+int positionX = width/2;
 int positionY= height/2;
 int maxValue;
 int closestValue;
 PVector currentLocation;
 PVector lastLocation;
 PVector location;
+String  legende0= "Place à Amsterdam";
+String  legende1= "Métro";
+String  legende2= "Soirée UPEM";
+String  legende3= "Place publique";
+color couleur = color(0);
+PFont fontLegende = loadFont("HelveticaNeue-Light-24.vlw");
+
       
     SmartPoint()
     {
@@ -49,6 +56,7 @@ PVector location;
         
         lastLocation.y = ( lastLocation.y+ currentLocation.y)/2;
         lastLocation.x = lastLocation.x *1.5;
+        lastLocation.y = lastLocation.y *1.25;
       }
        boolean hitTarget(Btn btn)
        {  // on utilise
@@ -64,78 +72,96 @@ PVector location;
       {
         
         noStroke();
-        fill(255,0,0);
-        ellipse(lastLocation.x,lastLocation.y,20,20); 
+        fill(203,5,75);
+        ellipse(lastLocation.x,lastLocation.y,10,10); 
         
       }
-      
-      
-  
-  
-      
-      void slider()
-      {             
-                imageMode(CENTER);
-                image( img[1], position  , positionY);
-                image( img[2], position +1500  , positionY);
-                image( img[4], position +3000  , positionY);
-                image( img[5], position +4500  , positionY);
-                
-                
-    
-      }
-      void bouge(){
-      
-            if ((  lastLocation.x >= 10 && lastLocation.x <= 60) && (  lastLocation.y >= 10 && lastLocation.y <= (height- 30)))
-            { 
-            position = position +50;
-            }
-         else if((lastLocation.x >= (width- 60) && lastLocation.x <= (width +500)) && (  lastLocation.y >= 10 && lastLocation.y <= (height- 30)))
-            { 
-              position = position - 50;
-            }
-            
-           else if(( lastLocation.x >= 600 && lastLocation.x <= 800) && (  lastLocation.y >= 10 && lastLocation.y <= 70) && positionY == height/2)
-           {
-             smooth();
-             positionY = positionY- 1500;// position du menu
-  
-             
-            
-             
-           }
-           
-           else if(( lastLocation.x >=1100  && lastLocation.x <= 1300) && (  lastLocation.y >= 10 && lastLocation.y <= 70) && positionY == height/2)
-           {
-             //positionY = positionY+ 500;
-             exit(); 
-             //refresh();
-          
-  
-             
-            
-             
-           }
-           
-           
-      }
-      
-       void refresh()
-      {         
-                background(0);
-                imageMode(CENTER);
-                image( img[1], width/2  , height/2);
-                image( img[2], width/2 +1500  , height/2);
-                image( img[4], width/2 +3000  , height/2);
-                image( img[5], width/2 +4500  , height/2);
-                
-                 redraw();
-                
-    
-      }
+
+      void slider()// fonction d'affichage des images
+      {            
         
+                imageMode(CENTER);
+                image( img[1], positionX  , positionY);
+                image( img[2], positionX +1500  , positionY);
+                image( img[4], positionX +3000  , positionY);
+                image( img[5], positionX+4500  , positionY);
+                
+                // Aside coté gauche de l'écran
+                colorMode(RGB);
+                stroke(255);
+                fill(0);
+                rect(0, 0, 430, height);
+                image( logo[1], 200, 50); // affichage du logo
+
+      }
+      void bouge(){ // fonction qui permet de faire bouger les images à l'aide des zones de bouton,
+                 
+      // affichage des fleche blanches
+      image( repere[1], 480  , height/2);
+      image( repere[2], width-70  , height/2);
+      
+                
+                
+            if ((  lastLocation.x >= 0 && lastLocation.x <= 530) && (  lastLocation.y >= 10 && lastLocation.y <= (height- 30)))
+            { 
+            positionX = positionX +50;
+            //image( repere[1], 50  , 5000);
+            image( repere[4], 480, height/2);// affichage fleche rouge gauche
+            
+            }
+         else if((lastLocation.x >= (width- 60) && lastLocation.x <= (width+500)) && (  lastLocation.y >= 10 && lastLocation.y <= (height- 30)))
+            { 
+              positionX = positionX - 50;
+              //image( repere[2], width-70  , 5000);
+              image( repere[3], width-70  , height/2); // affichage fleche rouge droite
+            }
+            
+          else if( positionX <= -4500 || positionX >= 50) // condition pour revenir à l'image du début
+           {
+             positionX= width/2 + 200;
+           
+           }
+            
+      }
+      void positionLegend() // fonction pour afficher les légendes des images
+    {
+      if( positionX <= 1500  && positionX >= 0)
+      {
+        
+         textFont(fontLegende, 24);
+         fill(255);
+         text(legende0,(width/2+150), 720);
+      
+      }
+      if( positionX <= 0  && positionX >= -1500)
+      {
+        
+         textFont(fontLegende, 24);
+         fill(255);
+         text(legende1,(width/2+150), 720);
+      
+      }
+      else if( positionX <= -1500 && positionX >= -3000)
+      {
+        
+         textFont(fontLegende, 24);
+         fill(255);
+         text(legende2,(width/2+150), 720);
+      
+      }
+      else if( positionX <= -3000 && positionX >= -4500)
+      {
+        
+         textFont(fontLegende, 24);
+         fill(255);
+         text(legende3,(width/2+150), 720);
+      
+      }
+    
     }
+        
     
+}
 
     
     

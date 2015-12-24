@@ -5,7 +5,7 @@ SmartPoint sp;
 Btn btn1, btn2,btn3,btn4;
 Maconsole console;
 MonTexte titre;
-PImage [] img;
+PImage [] img, repere, logo, couverture;
 String message;
 int[] userList;
 
@@ -22,12 +22,29 @@ void setup(){
   context.enableUser();
   
   // instance de classe
+  // Les photos
   img = new PImage[8];
   
   for( int i = 1; i < 6; i++){
     img[i] = loadImage("image_"+i+".png");
   }
-   
+  // les reperes sur l'interface
+  
+  repere =new PImage[6];
+  
+  for (int j=1; j<5; j++)
+  {
+    repere[j] = loadImage("fleche_"+j+".png");
+  }
+  
+  //Le logo
+ 
+ logo = new PImage[2];
+ logo[1] = loadImage("logoIP.PNG");
+ 
+ // image d'accueil
+ couverture = new PImage[2];
+ couverture[1] = loadImage("couverture.PNG");
   
   sp = new SmartPoint();
   btn1 = new Btn(10,10,50,height-30,1,5);
@@ -40,12 +57,14 @@ void setup(){
 }
 void draw()
 { 
-  // Le background 
-  colorMode(RGB);
-  background(55,54,53);
+  
+  background(0);// L'arriere plan noir
   
   
-  context.update(); // mettre avatn le sp.update sinon pas de modif
+
+  
+  
+  context.update(); // mettre avatn le   image( couverture[1], 0, ); // affichage du logosp.update sinon pas de modif
   userList = context.getUsers();
   
   if(userList.length == 1)
@@ -88,13 +107,14 @@ void draw()
       btn3.display();
       btn4.display();
       titre.display();
+      sp.positionLegend();
       
           // condition des boutons
           if( sp.hitTarget(btn1))
           { // fonction qui renvoie un resultat  vrai ou faux  // donc s'il ya collsion je fais ça...
               
               btn1.isHit(); //
-              
+          
       
               
            }else
@@ -133,6 +153,7 @@ void draw()
           { // fonction qui renvoie un resultat  vrai ou faux  // donc s'il ya collsion je fais ça...
               
               btn4.isHit(); //
+              exit();
               
               
             
@@ -145,6 +166,12 @@ void draw()
 }
 
 //fonction d'affichage des images
+
+
+ 
+ 
+ 
+// SimpleOpenNI user events
 
 void afficheImage( )
 {
@@ -159,13 +186,7 @@ void afficheImage( )
   }
   
  }
- 
- 
- 
- 
-// SimpleOpenNI user events
-
-void onNewUser(SimpleOpenNI curContext,int userId)
+ void onNewUser(SimpleOpenNI curContext,int userId)
 {
   println("onNewUser - userId: " + userId);
   println("\tstart tracking skeleton");
@@ -178,8 +199,5 @@ void onLostUser(SimpleOpenNI curContext,int userId)
   println("onLostUser - userId: " + userId);
 }
 
-void onVisibleUser(SimpleOpenNI curContext,int userId)
-{
-  //println("onVisibleUser - userId: " + userId);
-}
+
 

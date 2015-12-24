@@ -6,7 +6,7 @@ int alpha;
 int id;
 int speed;
 // constructeur
-Btn(float x, float y, int _mWidth, int _mHeight , int _id, int _speed) {
+Btn(float x, float y, int _mWidth, int _mHeight ,int _id, int _speed) {
 
   location = new PVector(x, y);
   mWidth = _mWidth;
@@ -20,8 +20,8 @@ Btn(float x, float y, int _mWidth, int _mHeight , int _id, int _speed) {
 void display() 
 {
   colorMode(RGB);
-  fill(0);
-  stroke(58,193,98);
+  //stroke(58,193,98);
+  //fill(0, alpha);
   noFill();
   rect(location.x, location.y, mWidth, mHeight);
 }
